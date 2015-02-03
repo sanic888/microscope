@@ -7,9 +7,12 @@ Router.configure({
 	}
 });
 
-Router.route('/', {name: 'postsList'});
-Router.route('/posts/:_id', {name: 'postPage', data: function(){ return Posts.findOne({_id: this.params._id}); }});
-Router.route('/submit', {name: 'postSubmit'});
+Router.map(function(){
+	this.route('postsList', {path: '/'});
+	this.route('postPage', {path: '/posts/:_id', data: function(){return Posts.findOne(this.params._id)}});
+	this.route('postSubmit', {path: '/submit'});
+	this.route('postEdit', {path: '/posts/:_id/edit', data: function(){return Posts.findOne(this.params._id)}});
+});
 
 var requireLogin = function(){
 	if (!Meteor.user()){
