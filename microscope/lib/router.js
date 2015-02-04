@@ -28,3 +28,7 @@ var requireLogin = function(){
 
 Router.onBeforeAction('dataNotFound', {only: 'postPage'});
 Router.onBeforeAction(requireLogin, {only: 'postSubmit'});
+Router.onBeforeAction(function(){ 
+	clearErrors();
+	this.next();
+}, {only: 'postSubmit'});
