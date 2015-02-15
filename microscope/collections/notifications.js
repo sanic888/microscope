@@ -8,7 +8,7 @@ Notifications.allow({
 });
 
 createCommentNotification = function(comment){
-	var post = Post.findOne(comment.postId);
+	var post = Posts.findOne(comment.postId);
 	if (comment.userId !== post.userId){
 		Notifications.insert({
 			userId: post.userId,

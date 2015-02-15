@@ -12,18 +12,19 @@ Meteor.methods({
 		if (!post)
 	  		throw new Meteor.Error(422, 'You must comment on a post');
 
-	  	comment = _.extend(commentAttributes,
+	  	var comment = _.extend(commentAttributes,
 							{
 								userId: user._id,
 								author: user.userName,
 								submitted: new Date()
 							});
 
-		Post.update(comment.postId, {$inc: {commentsCount: 1}});
+		Posts.update(comment.postId, {$inc: {commentsCount: 1}});
 
 	    comment._id = Comments.insert(comment);
 
 	    createCommentNotification(comment);
+	    
 	    return comment._id;
 	}
 });
