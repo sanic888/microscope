@@ -1,14 +1,77 @@
 <template name="layout">
-	    <div class="container">
-	    <div id="id1">1</div>
-	    <div id="id2">2</div>
-	    <div id="id3">3</div>
-		<ul class="nav nav-pills nav-justified custom-nav-justified">
-	      <li role="presentation" class="active"><a href="#">Main</a></li>
-	      <li role="presentation"><a href="#">Settings</a></li>
-	      <li role="presentation"><a href="#">Contact Us</a></li>
-	      <li role="presentation"><a href="#">Help</a></li>
-	    </ul>
-	    </div>
 
+	<div class="tab-content active text-center" data-name="home">
+		<div>Group:</div>
+		<select class="group-select">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+		<div>Frequency:</div>
+
+		<div>
+			<span class="glyphicon glyphicon-menu-up"></span>
+			<span class="glyphicon glyphicon-menu-up"></span>
+		</div>
+
+		<div class="hours">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>6</div>
+			<div>7</div>
+			<div>8</div>
+			<div>9</div>
+			<div>10</div>
+			<div>11</div>
+		</div>
+		<div class="minutes">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>6</div>
+			<div>7</div>
+			<div>8</div>
+			<div>9</div>
+			<div>10</div>
+			<div>11</div>
+		</div>
+
+		<div>
+			<span class="glyphicon glyphicon-menu-down"></span>
+			<span class="glyphicon glyphicon-menu-down"></span>
+		</div>
+		
+	</div>
+	<div class="tab-content" data-name="settings">
+		2
+	</div>
+	<div class="tab-content" data-name="contacts">
+		3
+	</div>
+	<div class="tab-content" data-name="help">
+		4
+	</div>
+	<ul class="tabs">
+		<li class="active" data-action="home">
+			<span class="glyphicon glyphicon-home"></span>
+			<div>Home</div>
+		</li>
+		<li data-action="settings">
+			<span class="glyphicon glyphicon-wrench"></span>
+			<div>Settings</div>
+		</li>
+		<li data-action="contacts">
+			<span class="glyphicon glyphicon-phone-alt"></span>
+			<div>Contact Us</div>
+		</li>
+		<li data-action="help">
+			<span class="glyphicon glyphicon-info-sign"></span>
+			<div>Help</div>
+		</li>
+	</ul>
 </template>
