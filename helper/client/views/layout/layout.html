@@ -7,45 +7,37 @@
 			<option value="2">2</option>
 			<option value="3">3</option>
 		</select>
-		<div>Frequency:</div>
-
-		<div>
-			<span class="glyphicon glyphicon-menu-up"></span>
-			<span class="glyphicon glyphicon-menu-up"></span>
-		</div>
-
-		<div class="hours">
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-			<div>4</div>
-			<div>5</div>
-			<div>6</div>
-			<div>7</div>
-			<div>8</div>
-			<div>9</div>
-			<div>10</div>
-			<div>11</div>
-		</div>
-		<div class="minutes">
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-			<div>4</div>
-			<div>5</div>
-			<div>6</div>
-			<div>7</div>
-			<div>8</div>
-			<div>9</div>
-			<div>10</div>
-			<div>11</div>
-		</div>
-
-		<div>
-			<span class="glyphicon glyphicon-menu-down"></span>
-			<span class="glyphicon glyphicon-menu-down"></span>
-		</div>
 		
+		<div class="time-settings">
+			<div>Frequency:</div>
+			<div class="hours">
+				<span>h:</span>
+				<select class="hours-select">
+					{{#each hours}}
+						<option value="{{.}}">{{.}}</option>
+					{{/each}}
+				</select>
+			</div>
+			<div class="minutes">
+				<span>m:</span>
+				<select class="minutes-select">
+					{{#each minutes}}
+						<option value="{{.}}">{{.}}</option>
+					{{/each}}
+				</select>
+			</div>
+		</div>
+
+		<div>
+			<button class="timer-start">Start</button>
+			<button class="timer-stop hide">Stop</button>
+			<button class="timer-reset hide">Reset</button>
+		</div>
+
+		<div class="timer">
+			<span class="timer-hours">00</span>:<span class="timer-minutes">00</span>:<span class="timer-seconds">00</span>
+		</div>
+
 	</div>
 	<div class="tab-content" data-name="settings">
 		2
