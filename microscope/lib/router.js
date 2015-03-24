@@ -1,34 +1,41 @@
 var postsLimit;
 PostsListController = RouteController.extend({
-  template: 'postsList',
-  _increment: 5,
-  _limit: function() {
-  	postsLimit = parseInt(this.params.postsLimit) || this._increment;
-    return postsLimit;
-  },
-  _findOptions: function() {
-    return {sort: {submitted: -1}, limit: this._limit()};
-  },
-  // waitOn: function() {
-  //   return Meteor.subscribe('posts', this._findOptions());
-  // },
-  // data: function() {
-  //   return {posts: Posts.find({}, this._findOptions())};
-  // },
   onBeforeAction: function() {
-    this.postsSub = Meteor.subscribe('posts', this._findOptions());
+    this.postsSub = Meteor.subscribe('posts', this.findOptions());
     this.next();
   },
+  template: 'postsList',
+  increment: 5, 
+  limit: function() { 
+    return parseInt(this.params.postsLimit) || this.increment; 
+  },
+  findOptions: function() {
+    return {sort: this.sort, limit: this.limit()};
+  },
+  // waitOn: function() {
+  //   return Meteor.subscribe('posts', this.findOptions());
+  // },
   posts: function() {
-    return Posts.find({}, this._findOptions());
+    return Posts.find({}, this.findOptions());
   },
   data: function() {
-    var hasMore = this.posts().fetch().length === this._limit();
-    var nextPath = this.route.path({postsLimit: this._limit() + this._increment});
+    var hasMore = this.posts().count() === this.limit();
     return {
       posts: this.posts(),
-      nextPath: hasMore ? nextPath : null
+      nextPath: hasMore ? this.nextPath() : null
     };
+  }});
+
+NewPostsListController = PostsListController.extend({
+  sort: {submitted: -1, _id: -1},
+  nextPath: function() {
+    return Router.routes.newPosts.path({postsLimit: this.limit() + this.increment})
+  }
+});
+BestPostsListController = PostsListController.extend({
+  sort: {votes: -1, submitted: -1, _id: -1},
+  nextPath: function() {
+    return Router.routes.bestPosts.path({postsLimit: this.limit() + this.increment})
   }
 });
 
@@ -41,7 +48,19 @@ Router.configure({
 	}
 });
 
-Router.map(function(){
+Router.map(function(){  
+	this.route('home', {
+	    path: '/',
+	    controller: NewPostsListController
+	});
+	  this.route('newPosts', {
+	    path: '/new/:postsLimit?',
+	    controller: NewPostsListController
+	});
+	  this.route('bestPosts', {
+	    path: '/best/:postsLimit?',
+	    controller: BestPostsListController
+	});
 	this.route('postPage', {
 		path: '/posts/:_id', 
 		data: function(){
@@ -64,20 +83,6 @@ Router.map(function(){
 			return Meteor.subscribe('singlePost', this.params._id);
 		},
 		data: function(){return Posts.findOne(this.params._id)}
-	});
-	this.route('postsList', {
-		path: '/:postsLimit?',
-/*		waitOn: function() {
-	      postsLimit = parseInt(this.params.postsLimit) || 5;
-	      return Meteor.subscribe('posts', {sort: {submitted: -1}, limit: postsLimit});
-	    },
-	    data: function() {
-	      //var limit = parseInt(this.params.postsLimit) || 5;
-	      return {
-	        posts: Posts.find()
-	      };
-	    },*/
-	    controller: PostsListController
 	});
 });
 

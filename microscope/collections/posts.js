@@ -29,16 +29,35 @@ Meteor.methods({
 		}
 
 		var user = Meteor.user();
-		var post = _.extend(postAttributes, {
-			userId: user._id,
-			author: user.username,
-			submitted: new Date(),
-			commentsCount: 0
+
+		var post = _.extend(_.pick(postAttributes, 'url', 'title', 'message'), {
+		  userId: user._id, 
+		  author: user.username, 
+		  submitted: new Date().getTime(),
+		  commentsCount: 0,
+		  upvoters: [], 
+		  votes: 0
 		});
+
 		var postId = Posts.insert(post);
 
 		return {
 			_id: postId
 		};
-	}
+	},
+	upvote: function(postId) {
+	    var user = Meteor.user();
+
+	    // удостоверимся, что пользователь залогинен
+	    if (!user)
+	      throw new Meteor.Error(401, "Надо залогиниться чтобы голосовать");
+
+	    Posts.update({
+	      _id: postId, 
+	      upvoters: {$ne: user._id}
+	    }, {
+	      $addToSet: {upvoters: user._id},
+	      $inc: {votes: 1}
+	    });
+	 }
 });
