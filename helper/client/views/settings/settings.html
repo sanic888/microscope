@@ -1,3 +1,37 @@
 <template name="settings">
-	settings
+	<table>
+		<thead>
+			<td>Name</td>
+			<td>Emails</td>
+			<td>Timer</td>
+			<td></td>
+		</thead>
+		<tbody>
+			{{#each groups}}
+				<tr>
+					<td>{{name}}</td>
+					<td>
+						{{#each emails}}
+							{{email}}<br/>
+						{{/each}}
+					</td>
+					<td>{{timer}}</td>
+				</tr>
+			{{/each}}
+			<tr>
+				<td>
+					<input type="text" name="groupName">
+				</td>
+				<td>
+					<input type="text" name="groupEmail">
+				</td>
+				<td>
+					<input type="text" name="groupTime">
+				</td>
+				<td>
+					<button class="btn btn-default" name="newGroup">Add</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </template>
