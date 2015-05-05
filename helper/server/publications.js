@@ -1,3 +1,3 @@
-Meteor.publish('groups', function(options){
-	return Groups.find({}, options);
+Meteor.publish('groups', function(){
+	return Groups.find({});
 });

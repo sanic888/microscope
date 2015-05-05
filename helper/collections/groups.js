@@ -1,6 +1,6 @@
-Groups1 = new Mongo.Collection('groups');
+Groups = new Mongo.Collection('groups');
 
-Groups1.allow({
+Groups.allow({
   insert: function(){
     return true;
   },
@@ -14,6 +14,6 @@ Groups1.allow({
 
 Meteor.methods({
 	insertGroup: function(group) {
-		Groups1.insert(group);
+		Groups.insert(group);
 	}
 });

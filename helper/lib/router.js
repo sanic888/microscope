@@ -6,3 +6,15 @@ Router.configure({
 		return [Meteor.subscribe('groups')];
 	}
 });
+
+Router.map(function(){
+	this.route('home', {
+		path: '/home',
+		waitOn: function() {
+			return Meteor.subscribe('groups');
+		},
+		data: function(){
+			return Groups.find({});
+		}
+	});
+});

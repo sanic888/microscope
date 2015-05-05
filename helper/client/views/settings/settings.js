@@ -13,6 +13,6 @@ Template.settings.events({
 
 Template.settings.helpers({
 	groups: function() {
-		return Groups1.find({});
+		return Groups.find({});
 	}
 });
