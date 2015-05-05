@@ -1,0 +1,38 @@
+<template name="home">
+	<div>Group:</div>
+	<select class="group-select">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	</select>
+	
+	<div class="time-settings">
+		<div>Frequency:</div>
+		<div class="hours">
+			<span>h:</span>
+			<select class="hours-select">
+				{{#each hours}}
+					<option value="{{.}}">{{.}}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div class="minutes">
+			<span>m:</span>
+			<select class="minutes-select">
+				{{#each minutes}}
+					<option value="{{.}}">{{.}}</option>
+				{{/each}}
+			</select>
+		</div>
+	</div>
+
+	<div>
+		<button class="timer-start">Start</button>
+		<button class="timer-stop hide">Stop</button>
+		<button class="timer-reset hide">Reset</button>
+	</div>
+
+	<div class="timer">
+		<span class="timer-hours">00</span>:<span class="timer-minutes">00</span>:<span class="timer-seconds">00</span>
+	</div>
+</template>
