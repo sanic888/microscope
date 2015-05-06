@@ -1,15 +1,12 @@
 Router.configure({
 	layoutTemplate: 'layout',
 	loadingTemplate: 'loading',
-	notFoundTemplate: "notFound",
-	waitOn: function(){
-		return [Meteor.subscribe('groups')];
-	}
+	notFoundTemplate: "notFound"
 });
 
 Router.map(function(){
-	this.route('home', {
-		path: '/home',
+	this.route('', {
+		path: '/',
 		waitOn: function() {
 			return Meteor.subscribe('groups');
 		},

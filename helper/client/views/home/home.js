@@ -107,6 +107,9 @@ Template.home.events({
 });
 
 Template.home.helpers({
+	groups: function(){
+		return Groups.find();
+	},
 	hours: function(){
 		var hours = [];
 

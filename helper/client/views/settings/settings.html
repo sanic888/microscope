@@ -1,35 +1,57 @@
 <template name="settings">
-	<table>
+	<table class="table table-hover">
 		<thead>
 			<td>Name</td>
 			<td>Emails</td>
 			<td>Timer</td>
-			<td></td>
+			<td>Actions</td>
 		</thead>
 		<tbody>
 			{{#each groups}}
 				<tr>
-					<td>{{name}}</td>
 					<td>
-						{{#each emails}}
-							{{email}}<br/>
-						{{/each}}
+						{{#if isEditMode}}
+							<input type="text" name="groupName" value="{{name}}" requied>
+						{{else}}
+							{{name}}
+						{{/if}}
 					</td>
-					<td>{{timer}}</td>
+					<td>
+						{{#if isEditMode}}
+							<input type="email" name="groupEmail" value="{{email}}" requied>
+						{{else}}
+							{{email}}
+						{{/if}}
+					</td>
+					<td>
+						{{#if isEditMode}}
+							<input type="time" name="groupTime" value="{{time}}" requied>
+						{{else}}
+							{{time}}
+						{{/if}}
+					</td>
+					<td>
+						{{#if isEditMode}}
+							<span class="glyphicon glyphicon-ok" name="groupSave" data-id="{{_id}}"></span>
+						{{else}}
+							<span class="glyphicon glyphicon-pencil" name="groupEdit" data-id="{{_id}}"></span>
+							<span class="glyphicon glyphicon-trash" name="groupRemove" data-id="{{_id}}"></span>
+						{{/if}}
+					</td>
 				</tr>
 			{{/each}}
 			<tr>
 				<td>
-					<input type="text" name="groupName">
+					<input type="text" name="groupName" requied>
 				</td>
 				<td>
-					<input type="text" name="groupEmail">
+					<input type="email" name="groupEmail" requied>
 				</td>
 				<td>
-					<input type="text" name="groupTime">
+					<input type="time" name="groupTime" requied>
 				</td>
 				<td>
-					<button class="btn btn-default" name="newGroup">Add</button>
+					<span name="newGroup" class="glyphicon glyphicon-plus"></span>
 				</td>
 			</tr>
 		</tbody>
